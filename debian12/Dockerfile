@@ -33,7 +33,7 @@ RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor
 # 安装.NET 8.0.20 ASP.NET Core运行时
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        aspnetcore-runtime-8.0.20 \
+        aspnetcore-runtime-8.0 \
     && rm -rf /var/lib/apt/lists/*
 
 # 设置工作目录（自动创建/data，无需手动mkdir）
