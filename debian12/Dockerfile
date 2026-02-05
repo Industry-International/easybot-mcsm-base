@@ -24,8 +24,13 @@ RUN apt-get update \
         zlib1g \
         curl \
         gnupg \
-        dotnet-sdk-8.0 \
     && rm -rf /var/lib/apt/lists/*
+
+RUN curl -L https://dot.net/v1/dotnet-install.sh -o dotnet-install.sh \
+    && chmod +x ./dotnet-install.sh \
+    && bash ./dotnet-install.sh --channel 8.0 --install-dir /usr/share/dotnet \
+    && ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet \
+    && rm dotnet-install.sh
 
 # 设置工作目录（自动创建/data，无需手动mkdir）
 WORKDIR /data
