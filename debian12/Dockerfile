@@ -6,7 +6,7 @@ FROM debian:bookworm-slim
 
 # 设置核心环境变量
 ENV DOTNET_RUNNING_IN_CONTAINER=true \
-    DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=true \
+    DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false \
     DEBIAN_FRONTEND=noninteractive \
     TZ=Asia/Shanghai
 
@@ -21,11 +21,17 @@ RUN /bin/sh -c apt-get update \
         libstdc++6 \
         tzdata \
         zlib1g \
-        aspnetcore-runtime-8.0.20 \
     && rm -rf /var/lib/apt/lists/*
 
+RUN /bin/sh -c curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg \
+&& echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-prod.gpg] https://packages.microsoft.com/debian/12/prod bookworm main" > /etc/apt/sources.list.d/microsoft.list
+
+# 3. 安装.NET 8.0.20 ASP.NET Core运行时（现在能正常找到包）
+RUN /bin/sh -c apt-get update \
+    && apt-get install -y --no-install-recommends \
+        aspnetcore-runtime-8.0.20 \
+    && rm -rf /var/lib/apt/lists/*
 # 创建工作目录
-RUN mkdir -p /data
 WORKDIR /data
 
 # 安装浏览器/无头浏览器核心依赖，清理缓存
