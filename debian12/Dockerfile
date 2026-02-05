@@ -24,16 +24,7 @@ RUN apt-get update \
         zlib1g \
         curl \
         gnupg \
-    && rm -rf /var/lib/apt/lists/*
-
-# 新增：添加微软官方GPG密钥和.NET APT源（解决.NET包找不到的问题）
-RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg \
-    && echo "deb [arch=amd64,arm64 signed-by=/usr/share/keyrings/microsoft-prod.gpg] https://packages.microsoft.com/debian/12/prod bookworm main" > /etc/apt/sources.list.d/microsoft.list
-
-# 安装.NET 8.0.20 ASP.NET Core运行时
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        aspnetcore-runtime-8.0 \
+        dotnet-sdk-8.0 \
     && rm -rf /var/lib/apt/lists/*
 
 # 设置工作目录（自动创建/data，无需手动mkdir）
