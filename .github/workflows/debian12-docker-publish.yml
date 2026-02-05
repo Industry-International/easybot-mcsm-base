@@ -30,7 +30,7 @@ jobs:
             --output "type=image,push=true" \
             --platform linux/amd64 \
             --tag ${DOCKER_REPO}:${CUSTOM_TAG} \
-            --file .debian12/Dockerfile \
+            --file ./debian12/Dockerfile \
             .
 
       - name: 退出 Docker Hub
