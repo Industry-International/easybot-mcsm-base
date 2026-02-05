@@ -28,7 +28,7 @@ RUN apt-get update \
 
 RUN curl -L https://dot.net/v1/dotnet-install.sh -o dotnet-install.sh \
     && chmod +x ./dotnet-install.sh \
-    && bash ./dotnet-install.sh --version 8.0 --runtime aspnetcore --install-dir /usr/share/dotnet \
+    && bash ./dotnet-install.sh --version 8.0.23 --runtime aspnetcore --install-dir /usr/share/dotnet \
     && ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet \
     && rm dotnet-install.sh
 
