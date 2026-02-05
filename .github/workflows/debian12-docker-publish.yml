@@ -1,4 +1,4 @@
-name: docker-publish
+name: debian12-docker-publish
 
 on:
   workflow_dispatch:  # 手动触发
@@ -30,7 +30,7 @@ jobs:
             --output "type=image,push=true" \
             --platform linux/amd64 \
             --tag ${DOCKER_REPO}:${CUSTOM_TAG} \
-            --file ./Dockerfile \
+            --file .debian12/Dockerfile \
             .
 
       - name: 退出 Docker Hub
