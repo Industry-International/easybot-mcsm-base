@@ -28,7 +28,7 @@ RUN apt-get update \
 
 # 新增：添加微软官方GPG密钥和.NET APT源（解决.NET包找不到的问题）
 RUN curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg \
-    && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-prod.gpg] https://packages.microsoft.com/debian/12/prod bookworm main" > /etc/apt/sources.list.d/microsoft.list
+    && echo "deb [arch=amd64/arch=arm64 signed-by=/usr/share/keyrings/microsoft-prod.gpg] https://packages.microsoft.com/debian/12/prod bookworm main" > /etc/apt/sources.list.d/microsoft.list
 
 # 安装.NET 8.0.20 ASP.NET Core运行时
 RUN apt-get update \
